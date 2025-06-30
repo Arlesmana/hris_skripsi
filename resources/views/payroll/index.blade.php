@@ -33,10 +33,11 @@
                 </h5>
             </div>
             <div class="card-body">
-
+                @if (session('role') == 'HR')
                 <div class="d-flex">
                     <a href="{{ route('payrolls.create')}}" class="btn btn-primary mb-3 ms-auto">New Payroll</a>
                 </div>
+                @endif
 
                 @if(session('success'))
                     <div class="alert alert-success">

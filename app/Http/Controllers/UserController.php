@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        // Fetch the logged-in user's data
+        $user = Auth::user();
 
-        return view('users.index', compact('users'));
-
+        // Pass the user data to the view
+        return view('users.index', compact('user'));
     }
 }

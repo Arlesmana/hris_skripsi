@@ -93,7 +93,7 @@
             <li class="sidebar-item {{ request()->is('roles*') ? 'active' : '' }}">
                 <a href="{{ url('roles') }}" class='sidebar-link'>
                     <i class="bi bi-tools"></i>
-                    <span>Peran Pekerjaan</span>
+                    <span>Role</span>
                 </a>
             </li>
             <li class="sidebar-item {{ request()->is('presences*') ? 'active' : '' }}">
