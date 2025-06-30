@@ -14,7 +14,7 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login'); // Arahkan ke halaman login jika belum login
 })->name('welcome');
 
 Route::middleware(['auth'])->group(function () {

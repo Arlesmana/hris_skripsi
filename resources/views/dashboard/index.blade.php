@@ -89,7 +89,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Online Presence Section -->
         <div class="col-12 col-lg-6">
             <div class="card shadow-sm border-0 rounded-3">
@@ -98,6 +97,7 @@
                     <i class="bi bi-globe fs-4"></i>
                 </div>
                 <div class="card-body">
+                
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <h6 class="text-muted">Total Presence</h6>
