@@ -50,7 +50,7 @@
                 <form action="{{ route('tasks.store') }}" method="POST">
                     @csrf
         
-                    <!-- Task Title -->
+                
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required>
@@ -59,7 +59,7 @@
                         @enderror
                     </div>
         
-                    <!-- Assigned To (Employee) Dropdown -->
+                    
                     <div class="mb-3">
                         <label for="assigned_to" class="form-label">Assigned To</label>
                         <select class="form-select @error('assigned_to') is-invalid @enderror" name="assigned_to" required>
@@ -76,7 +76,7 @@
                         @enderror
                     </div>
         
-                    <!-- Due Date -->
+                   
                     <div class="mb-3">
                         <label for="due_date" class="form-label">Due Date</label>
                         <input type="datetime-local" class="form-control date @error('due_date') is-invalid @enderror" name="due_date" value="{{ old('due_date') }}" required>
@@ -85,7 +85,7 @@
                         @enderror
                     </div>
         
-                    <!-- Status -->
+                   
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <select name="status" class="form-control @error('status') is-invalid @enderror" id="status">
@@ -98,7 +98,7 @@
                         @enderror
                     </div>
         
-                    <!-- Description -->
+                    
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control @error('description') is-invalid @enderror" name="description">{{ old('description') }}</textarea>

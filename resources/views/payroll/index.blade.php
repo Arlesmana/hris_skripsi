@@ -63,7 +63,7 @@
           
                         <tr>
                             <td>{{ $payroll->employee->fullname }}</td>
-                            <td>{{ number_format($payroll->salary, 0, ',', '.') }}</td>
+                            <td>{{ number_format($payroll->employee->salary, 0, ',', '.') }}</td>
                             <td>{{ number_format($payroll->bonuses, 0, ',', '.') }}</td>
                             <td>{{ number_format($payroll->deductions, 0, ',', '.') }}</td>
                             <td>{{ number_format($payroll->net_salary, 0, ',', '.') }}</td>

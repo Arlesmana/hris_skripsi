@@ -33,10 +33,11 @@
                 </h5>
             </div>
             <div class="card-body">
-
+                @if (session('role') == 'HR')
                 <div class="d-flex">
                     <a href="{{ route('employees.create')}}" class="btn btn-primary mb-3 ms-auto">New Employees</a>
                 </div>
+                @endif
 
                 @if(session('success'))
                     <div class="alert alert-success">
@@ -74,12 +75,14 @@
 
                             <td>
                                 <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-info btn-sm">View</a>
+                                @if (session('role') == 'HR')
                                 <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah kamu yakin?')">Delete</button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
 

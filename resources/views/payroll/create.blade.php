@@ -64,14 +64,23 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    
-                    <div class="mb-3"> 
+
+                     <div class="mb-3">
                         <label for="salary" class="form-label">Salary</label>
-                        <input type="number" class="form-control @error('salary') is-invalid @enderror" name="salary" value="{{ old('salary') }}" required>
+                        <select class="form-control @error('salary') is-invalid @enderror" name="salary" required>
+                            <option value="" disabled selected>Select an Salary</option>
+                            @foreach($employees as $employee)
+                                <option value="{{ $employee->id }}" {{ old('salary') == $employee->id ? 'selected' : '' }}>
+                                    {{ $employee->fullname }} — {{ number_format($employee->salary, 0, ',', '.') }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('salary')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    
+                    
                     <div class="mb-3">
                         <label for="bonuses" class="form-label">Bonus</label>
                         <input type="number" class="form-control @error('bonus') is-invalid @enderror" name="bonuses" value="{{ old('bonus') }}" required>
@@ -90,7 +99,7 @@
 
                     <div class="mb-3">
                         <label for="pay_date" class="form-label">Pay Date</label>
-                        <input type="date" class="form-control @error('pay_date') is-invalid @enderror" name="pay_date" value="{{ old('pay_date') }}" required>
+                        <input type="date" class="form-control date @error('pay_date') is-invalid @enderror" name="pay_date" value="{{ old('pay_date') }}" required>
                         @error('pay_date')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

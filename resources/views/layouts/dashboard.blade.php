@@ -132,6 +132,13 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            
+            <li class="sidebar-item {{ request()->is('employees*') ? 'active' : '' }}">
+                <a href="{{ url('employees') }}" class='sidebar-link'>
+                    <i class="bi bi-person-fill"></i>
+                    <span>Employees</span>
+                </a>
+            </li>
 
             <li class="sidebar-item {{ request()->is('tasks*') ? 'active' : '' }}">
                 <a href="{{ url('tasks') }}" class='sidebar-link'>

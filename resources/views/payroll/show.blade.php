@@ -29,15 +29,15 @@
 
     <section class="section">
         <div class="card shadow-lg border-0 rounded-3 animate__animated animate__fadeIn animate__delay-1s">
-            <div class="card-header bg-primary text-white text-center py-4 rounded-top">
+            <div class="card-header bg-gradient text-white text-center py-4 rounded-top">
                 <h5 class="card-title mb-0">Employee Payroll Information</h5>
             </div>
             <div class="card-body p-4">
                 <div class="row">
-                    <div id="print-area">
+                    <div id="print-area" class="col-12">
                         <!-- Employee Information -->
                         <div class="col-12 col-md-6 mb-4">
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
                                 <label for="employee" class="form-label fs-5 fw-bold text-dark">
                                     <i class="bi bi-person-circle"></i> Employee
                                 </label>
@@ -47,7 +47,7 @@
 
                         <!-- Salary Information -->
                         <div class="col-12 col-md-6 mb-4">
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
                                 <label for="salary" class="form-label fs-5 fw-bold text-dark">
                                     <i class="bi bi-currency-dollar"></i> Salary
                                 </label>
@@ -57,7 +57,7 @@
 
                         <!-- Bonus Information -->
                         <div class="col-12 col-md-6 mb-4">
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
                                 <label for="bonus" class="form-label fs-5 fw-bold text-dark">
                                     <i class="bi bi-gift"></i> Bonus
                                 </label>
@@ -67,9 +67,9 @@
 
                         <!-- Deductions Information -->
                         <div class="col-12 col-md-6 mb-4">
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
                                 <label for="deductions" class="form-label fs-5 fw-bold text-dark">
-                                    <i class="bi bi-x-circle"></i> Potongan
+                                    <i class="bi bi-x-circle"></i> Deductions
                                 </label>
                                 <p class="fs-5 text-muted mb-0">{{ number_format($payroll->deductions, 2) }}</p>
                             </div>
@@ -77,7 +77,7 @@
 
                         <!-- Net Salary Information -->
                         <div class="col-12 col-md-6 mb-4">
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
                                 <label for="net_salary" class="form-label fs-5 fw-bold text-dark">
                                     <i class="bi bi-currency-exchange"></i> Net Salary
                                 </label>
@@ -100,7 +100,7 @@
                 <!-- Action Buttons -->
                 <div class="text-end mt-4">
                     <a href="{{ route('payrolls.index') }}" class="btn btn-outline-primary px-5 py-2 rounded-3 mb-2">
-                        <i class="bi bi-arrow-left-circle-fill"></i> Back to payrolls List
+                        <i class="bi bi-arrow-left-circle-fill"></i> Back to Payrolls List
                     </a>
                     <a href="" class="btn btn-success px-5 py-2 rounded-3 mb-2">
                         <i class="bi bi-download"></i> Export to PDF/Excel
@@ -128,5 +128,13 @@
     });
 </script>
 
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    }
+    .border-bottom {
+        border-bottom: 1px solid #e0e0e0;
+    }
+</style>
 
 @endsection

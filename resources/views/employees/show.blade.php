@@ -51,6 +51,19 @@
                         </div>
 
                         <div class="mb-4">
+                            <label for="email" class="form-label fs-5 fw-bold text-dark">
+                                <i class="bi bi-house-door"></i> Alamat
+                            </label>
+                            <p class="fs-4 text-muted">{{ $employee->address }}</p>
+                        </div>
+                        <div class="mb-4">
+                            <label for="phone" class="form-label fs-5 fw-bold text-dark">
+                                <i class="bi bi-telephone"></i> No Telepon
+                            </label>
+                            <p class="fs-4 text-muted">{{ $employee->phone_number }}</p>
+                        </div>
+
+                        <div class="mb-4">
                             <label for="role" class="form-label fs-5 fw-bold text-dark">
                                 <i class="bi bi-person-badge"></i> Role
                             </label>
@@ -102,12 +115,7 @@
                             <p class="fs-4 text-muted">{{ number_format($employee->salary, 0, ',', '.') }}</p>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="description" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-file-earmark-text"></i> Description
-                            </label>
-                            <p class="fs-4 text-muted">{{ $employee->description ?? 'No description available' }}</p>
-                        </div>
+                        
                     </div>
                 </div>
 

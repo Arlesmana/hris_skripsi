@@ -22,11 +22,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['role:HR,IT,Developer']);
 
     //handle employee
-    Route::resource('/employees', EmployeeController::class)->middleware(['role:HR']);
+    Route::resource('/employees', EmployeeController::class)->middleware(['role:HR,IT,Developer']);
 
     //handle Users
     Route::resource('/users', UserController::class)->middleware(['role:HR,IT,Developer']);
-
+   
     //handle depatments
     Route::resource('/departments', DepartmentController::class)->middleware(['role:HR']);
 

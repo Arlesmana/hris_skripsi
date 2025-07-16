@@ -16,9 +16,11 @@ class PayrollController extends Controller
         $payrolls = Payroll::all();
         else
         $payrolls = Payroll::where('employee_id', session('employee_id'))->get();
-    
-        return view('payroll.index', compact('payrolls'));
+        $employees = Employee::all();
+        return view('payroll.index', compact('payrolls', 'employees'));
     }
+    
+    
     public function create()
     {
         $employees = Employee::all();
@@ -26,6 +28,7 @@ class PayrollController extends Controller
     }
     public function store(Request $request)
     {
+
         $request->validate([
             'employee_id' => 'required|exists:employees,id',
             'salary' => 'required|numeric', 

@@ -37,9 +37,9 @@
                     </div>
                 @endif
 
-                <!-- Single User Profile Information -->
+                
                 <div class="row g-3">
-                    <!-- Profile Picture Section -->
+                    
                     <div class="col-md-4 text-center">
                         <div class="mb-3">
                             <img src="{{ $user->profile_picture ?? asset('mazer/dist/assets/compiled/jpg/2.jpg') }}" 
@@ -51,10 +51,10 @@
                         <p class="text-muted">{{ $user->role }}</p>
                     </div>
 
-                    <!-- User Details Section -->
+                    
                     <div class="col-md-8">
                         <div class="row g-3">
-                            <!-- Full Name -->
+                           
                             <div class="col-md-6">
                                 <label for="fullname" class="form-label fw-semibold">
                                     <i class="bi bi-person-fill"></i> Full Name
@@ -62,57 +62,29 @@
                                 <p>{{ $user->name }}</p>
                             </div>
 
-                            <!-- Email Address -->
+                            
                             <div class="col-md-6">
                                 <label for="email" class="form-label fw-semibold">
                                     <i class="bi bi-envelope-fill"></i> Email Address
                                 </label>
                                 <p>{{ $user->email }}</p>
                             </div>
-
-                            <!-- Phone Number -->
-                            <div class="col-md-6">
-                                <label for="phone_number" class="form-label fw-semibold">
-                                    <i class="bi bi-telephone-fill"></i> Phone Number
-                                </label>
-                                <p>{{ $user->phone_number ?? 'Not Available' }}</p>
-                            </div>
-
-                            <!-- Address -->
-                            <div class="col-md-6">
-                                <label for="address" class="form-label fw-semibold">
-                                    <i class="bi bi-geo-alt-fill"></i> Address
-                                </label>
-                                <p>{{ $user->address ?? 'Not Available' }}</p>
-                            </div>
-
-                            <!-- Birth Date -->
-                            <div class="col-md-6">
-                                <label for="birth_date" class="form-label fw-semibold">
-                                    <i class="bi bi-calendar-event-fill"></i> Birth Date
-                                </label>
-                                <p>{{ $user->birth_date ? \Carbon\Carbon::parse($user->birth_date)->format('d-m-Y') : 'Not Available' }}</p>
-                            </div>
-
-                            <!-- About Me -->
-                            <div class="col-12">
-                                <label for="about_me" class="form-label fw-semibold">
-                                    <i class="bi bi-info-circle"></i> About Me
-                                </label>
-                                <p>{{ $user->about_me ?? 'Not Available' }}</p>
-                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Action Buttons -->
+               
                 <div class="mt-4 d-flex justify-content-between">
-                    <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary">
-                        <i class="bi bi-pencil-square"></i> Edit Profile
-                    </a>
-                    <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary">
+                    @if (session('role') == 'HR')
+                    
+                    <a href="{{ route('users.create') }}" class="btn btn-primary">
                         <i class="bi bi-pencil-square"></i> Tambah User
                     </a>
+                    @endif
+                    {{-- <a href="" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"></i> List User
+                    </a> --}}
+                    
                     <a href="{{ url('dashboard') }}" class="btn btn-outline-secondary">
                         <i class="bi bi-arrow-left-circle"></i> Back to Dashboard
                     </a>

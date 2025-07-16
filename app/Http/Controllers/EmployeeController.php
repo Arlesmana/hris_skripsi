@@ -5,13 +5,18 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Role;
+use App\Models\Payroll;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::all();
-
+        
+        if (session('role')== 'HR')
+        $employees = employee::all();
+        else
+        $employees = employee::where('id', session('employee_id'))->get();
+       
         return view('employees.index', compact('employees'));
 
     }
@@ -20,6 +25,7 @@ class EmployeeController extends Controller
     {
         $departments = Department::all();
         $roles = Role::all();
+       
 
         return view('employees.create', compact('departments', 'roles'));
     }
@@ -89,3 +95,5 @@ class EmployeeController extends Controller
     }
     
 }
+
+
