@@ -37,9 +37,7 @@
                     </div>
                 @endif
 
-                
                 <div class="row g-3">
-                    
                     <div class="col-md-4 text-center">
                         <div class="mb-3">
                             <img src="{{ $user->profile_picture ?? asset('mazer/dist/assets/compiled/jpg/2.jpg') }}" 
@@ -48,13 +46,11 @@
                         </div>
 
                         <h5>{{ $user->name }}</h5>
-                        <p class="text-muted">{{ $user->role }}</p>
+                        <H5 class="text-muted">{{ $user->role->title }}</H5>
                     </div>
 
-                    
                     <div class="col-md-8">
                         <div class="row g-3">
-                           
                             <div class="col-md-6">
                                 <label for="fullname" class="form-label fw-semibold">
                                     <i class="bi bi-person-fill"></i> Full Name
@@ -62,7 +58,6 @@
                                 <p>{{ $user->name }}</p>
                             </div>
 
-                            
                             <div class="col-md-6">
                                 <label for="email" class="form-label fw-semibold">
                                     <i class="bi bi-envelope-fill"></i> Email Address
@@ -73,17 +68,12 @@
                     </div>
                 </div>
 
-               
                 <div class="mt-4 d-flex justify-content-between">
-                    @if (session('role') == 'HR')
-                    
-                    <a href="{{ route('users.create') }}" class="btn btn-primary">
-                        <i class="bi bi-pencil-square"></i> Tambah User
-                    </a>
+                    @if (in_array(session('role'), ['Admin']))  <!-- Enhanced Role Check -->
+                        <a href="{{ route('users.create') }}" class="btn btn-primary" aria-label="Add new user">
+                            <i class="bi bi-pencil-square"></i> Tambah User
+                        </a>
                     @endif
-                    {{-- <a href="" class="btn btn-primary">
-                        <i class="bi bi-pencil-square"></i> List User
-                    </a> --}}
                     
                     <a href="{{ url('dashboard') }}" class="btn btn-outline-secondary">
                         <i class="bi bi-arrow-left-circle"></i> Back to Dashboard

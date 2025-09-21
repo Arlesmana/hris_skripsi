@@ -68,9 +68,9 @@
                     
 
                     <div class="mb-3">
-                        <label for="employee_id" class="form-label">Employee ID</label>
-                        <input type="text" class="form-control @error('employee_id') is-invalid @enderror" name="employee_id" value="{{ old('employee_id') }}" required>
-                        @error('employee_id')
+                        <label for="role_id" class="form-label">Role</label>
+                        <input type="text" class="form-control @error('role_id') is-invalid @enderror" name="role" value="{{ old('role_id') }}" required>
+                        @error('role_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

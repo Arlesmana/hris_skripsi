@@ -9,7 +9,7 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-    if (session('role')== 'HR')
+    if (session('role')== 'Admin' || session('role') == 'HR')
     $attendances = Attendance::all();  // Ambil semua data kehadiran dari model Attendance
     else
     $attendances = Attendance::where('employee_id', session('employee_id'))->get(); 

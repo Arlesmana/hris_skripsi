@@ -12,7 +12,7 @@ class PayrollController extends Controller
 {
     public function index()
     {
-        if (session('role')== 'HR')
+        if (session('role')== 'Admin' || session('role') == 'HR')
         $payrolls = Payroll::all();
         else
         $payrolls = Payroll::where('employee_id', session('employee_id'))->get();

@@ -1,6 +1,62 @@
 @extends('layouts.dashboard')
 
 @section('content')
+<style>
+    /* Styling for a more elegant look */
+    .card {
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,.08);
+        border: none;
+    }
+    
+    .card-header h5 {
+        font-weight: 600;
+        color: #4b5563;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #4b5563;
+    }
+
+    .form-control, .form-select {
+        border-radius: 0.5rem;
+        border: 1px solid #d1d5db;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 0.25rem rgba(79,70,229,.25);
+    }
+
+    /* Styling for buttons with better visuals */
+    .btn-primary {
+        background-color: #4f46e5;
+        border-color: #4f46e5;
+        box-shadow: 0 2px 5px rgba(79,70,229,.2);
+        transition: all 0.2s ease-in-out;
+    }
+    .btn-primary:hover {
+        background-color: #4338ca;
+        border-color: #4338ca;
+        transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+        background-color: #6b7280;
+        border-color: #6b7280;
+        color: #fff;
+        box-shadow: 0 2px 5px rgba(107,114,128,.2);
+        transition: all 0.2s ease-in-out;
+    }
+    .btn-secondary:hover {
+        background-color: #4b5563;
+        border-color: #4b5563;
+        transform: translateY(-1px);
+    }
+    
+</style>
 
 <header class="mb-3">
     <a href="#" class="burger-btn d-block d-xl-none">
@@ -51,11 +107,11 @@
                     @csrf
         
                     <div class="mb-3">
-                        <label for="employee" class="form-label">Employee</label>
-                        <select class="form-control @error('employee_id') is-invalid @enderror" name="employee_id" required>
+                        <label for="employee_id" class="form-label">Employee</label>
+                        <select class="form-control form-select @error('employee_id') is-invalid @enderror" name="employee_id" id="employee_id" required>
                             <option value="" disabled selected>Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->id }}" {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
+                                <option value="{{ $employee->id }}" data-salary="{{ $employee->salary }}" {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
                                     {{ $employee->fullname }}
                                 </option>
                             @endforeach
@@ -65,37 +121,27 @@
                         @enderror
                     </div>
 
-                     <div class="mb-3">
-                        <label for="salary" class="form-label">Salary</label>
-                        <select class="form-control @error('salary') is-invalid @enderror" name="salary" required>
-                            <option value="" disabled selected>Select an Salary</option>
-                            @foreach($employees as $employee)
-                                <option value="{{ $employee->id }}" {{ old('salary') == $employee->id ? 'selected' : '' }}>
-                                    {{ $employee->fullname }} — {{ number_format($employee->salary, 0, ',', '.') }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('salary')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    <div class="mb-3">
+                        <label for="salary_display" class="form-label">Salary</label>
+                        <input type="text" class="form-control" id="salary_display" disabled placeholder="Salary will be displayed here">
+                        <input type="hidden" name="salary" id="salary_input">
                     </div>
-                    
                     
                     <div class="mb-3">
                         <label for="bonuses" class="form-label">Bonus</label>
-                        <input type="number" class="form-control @error('bonus') is-invalid @enderror" name="bonuses" value="{{ old('bonus') }}" required>
+                        <input type="number" class="form-control @error('bonuses') is-invalid @enderror" name="bonuses" value="{{ old('bonuses') }}" required>
                         @error('bonuses')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    
                     <div class="mb-3">
                         <label for="deductions" class="form-label">Potongan</label>
-                        <input type="number" class="form-control @error('deductions') is-invalid @enderror" name="deductions" value="{{ old('deduction') }}" required>
+                        <input type="number" class="form-control @error('deductions') is-invalid @enderror" name="deductions" value="{{ old('deductions') }}" required>
                         @error('deductions')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
 
                     <div class="mb-3">
                         <label for="pay_date" class="form-label">Pay Date</label>
@@ -105,12 +151,55 @@
                         @enderror
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Create payroll</button>
-                    <a href="{{ route('payrolls.index') }}" class="btn btn-secondary">Back to payroll List</a>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> Create Payroll</button>
+                    <a href="{{ route('payrolls.index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left me-1"></i> Back to Payroll List</a>
                 </form>
             </div>
         </div>
     </section>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const employeeSelect = document.getElementById('employee_id');
+        const salaryDisplay = document.getElementById('salary_display');
+        const salaryInput = document.getElementById('salary_input');
+
+        // Function to format number as currency
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        }
+
+        // Event listener for employee selection change
+        employeeSelect.addEventListener('change', function() {
+            const selectedOption = employeeSelect.options[employeeSelect.selectedIndex];
+            const salary = selectedOption.dataset.salary;
+            
+            if (salary) {
+                // Set the display input value with formatted currency
+                salaryDisplay.value = formatRupiah(salary);
+                // Set the hidden input value with the raw number for form submission
+                salaryInput.value = salary;
+            } else {
+                salaryDisplay.value = '';
+                salaryInput.value = '';
+            }
+        });
+        
+        // Trigger change event on page load if an old value is present
+        if (employeeSelect.value) {
+             const selectedOption = employeeSelect.options[employeeSelect.selectedIndex];
+            const salary = selectedOption.dataset.salary;
+            if (salary) {
+                salaryDisplay.value = formatRupiah(salary);
+                salaryInput.value = salary;
+            }
+        }
+    });
+</script>
 
 @endsection

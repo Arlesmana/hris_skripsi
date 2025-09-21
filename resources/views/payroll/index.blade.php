@@ -33,9 +33,9 @@
                 </h5>
             </div>
             <div class="card-body">
-                @if (session('role') == 'HR')
+                @if (session('role') == 'Admin')
                 <div class="d-flex">
-                    <a href="{{ route('payrolls.create')}}" class="btn btn-primary mb-3 ms-auto">New Payroll</a>
+                    <a href="{{ route('payrolls.create')}}" class="btn btn-primary mb-3 ms-auto"><i class="bi bi-plus-lg"></i> New Payroll</a>
                 </div>
                 @endif
 
@@ -60,24 +60,24 @@
                     <tbody>
 
                         @foreach($payrolls as $payroll)
-          
+            
                         <tr>
                             <td>{{ $payroll->employee->fullname }}</td>
                             <td>{{ number_format($payroll->employee->salary, 0, ',', '.') }}</td>
                             <td>{{ number_format($payroll->bonuses, 0, ',', '.') }}</td>
-                            <td>{{ number_format($payroll->deductions, 0, ',', '.') }}</td>
-                            <td>{{ number_format($payroll->net_salary, 0, ',', '.') }}</td>
+                            <td>{{ number_format($payroll->deductions, 0, ',', '.') }}</td> 
+                            <td>{{ number_format($payroll->employee->salary + $payroll->bonuses - $payroll->deductions, 0, ',', '.') }}</td>
                             <td>{{ \Carbon\Carbon::parse($payroll->pay_date)->format('d-m-Y') }}</td>
 
                             <td>
-                                <a href="{{ route('payrolls.show', $payroll->id)}}" class="btn btn-info btn-sm">Detail Slip Gaji</a>
-                                @if (session('role') == 'HR')
-                                <a href="{{ route('payrolls.edit', $payroll->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('payrolls.show', $payroll->id)}}" class="btn btn-info btn-sm"><i class="bi bi-file-earmark-text"></i>E-Payslip</a>
+                                @if (session('role') == 'Admin')
+                                <a href="{{ route('payrolls.edit', $payroll->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> Edit</a>
 
                                 <form action="{{ route('payrolls.destroy', $payroll->id) }}" method="POST" style="display: inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Delete</button>
                                 </form>
                                 @endif
                             </td>
@@ -93,6 +93,4 @@
 
     </section>
 </div>
-
-
 @endsection

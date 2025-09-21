@@ -19,35 +19,36 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['role:HR,IT,Developer']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['role:Admin,HR,IT,Developer']);
 
     //handle employee
-    Route::resource('/employees', EmployeeController::class)->middleware(['role:HR,IT,Developer']);
+    Route::resource('/employees', EmployeeController::class)->middleware(['role:,Admin,HR,IT,Developer']);
 
     //handle Users
-    Route::resource('/users', UserController::class)->middleware(['role:HR,IT,Developer']);
+    Route::resource('/users', UserController::class)->middleware(['role:Admin,HR,IT']);
    
     //handle depatments
-    Route::resource('/departments', DepartmentController::class)->middleware(['role:HR']);
+    Route::resource('/departments', DepartmentController::class)->middleware(['role:Admin']);
 
     //handle Role
-    Route::resource('/roles', RoleController::class)->middleware(['role:HR']);
+    Route::resource('/roles', RoleController::class)->middleware(['role:Admin']);
 
     //handle presence
-    Route::resource('/presences', presencesController::class)->middleware(['role:HR,IT,Developer']);
-
+    Route::resource('/presences', presencesController::class)->middleware(['role:Admin,HR,IT,Developer']);
+    Route::get('presences/recap/{id}', [PresencesController::class, 'recap'])->name('presences.recap')->middleware(['role:Admin,HR']);
+    
     //handle payroll
-    Route::resource('/payrolls', payrollController::class)->middleware(['role:HR,IT,Developer']);
+    Route::resource('/payrolls', payrollController::class)->middleware(['role:Admin,HR,IT,Developer']);
 
     //handle attendance
-    Route::resource('attendances', AttendanceController::class)->middleware(['role:HR,Developer,IT']);
-    Route::get('attendances/approve/{id}', [AttendanceController::class, 'approve'])->name('attendances.approve')->middleware(['role:HR']);
-    Route::get('attendances/reject/{id}', [AttendanceController::class, 'reject'])->name('attendances.reject')->middleware(['role:HR']);
+    Route::resource('attendances', AttendanceController::class)->middleware(['role:Admin,HR,Developer,IT']);
+    Route::get('attendances/approve/{id}', [AttendanceController::class, 'approve'])->name('attendances.approve')->middleware(['role:Admin,HR']);
+    Route::get('attendances/reject/{id}', [AttendanceController::class, 'reject'])->name('attendances.reject')->middleware(['role:Admin,HR']);
 
     //handle task 
-    Route::resource('/tasks', TaskController::class)->middleware(['role:HR,IT,Developer']);
-    Route::get('tasks/done/{id}', [TaskController::class, 'done'])->name('tasks.done')->middleware(['role:HR']);
-    Route::get('tasks/pending/{id}', [TaskController::class, 'done'])->name('tasks.pending')->middleware(['role:HR']);  
+    Route::resource('/tasks', TaskController::class)->middleware(['role:Admin,HR,IT,Developer']);
+    Route::get('tasks/done/{id}', [TaskController::class, 'done'])->name('tasks.done')->middleware(['role:Admin,HR']);
+    Route::get('tasks/pending/{id}', [TaskController::class, 'done'])->name('tasks.pending')->middleware(['role:Admin,HR']);  
 
 
 

@@ -28,6 +28,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();   
+
+        session(['employee_id' => $user->id, 'role' => $user->role->title]);
+
+         
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

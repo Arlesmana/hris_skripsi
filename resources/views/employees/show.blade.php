@@ -2,134 +2,136 @@
 
 @section('content')
 
-<header class="mb-3">
-    <a href="#" class="burger-btn d-block d-xl-none">
-        <i class="bi bi-justify fs-3"></i>
-    </a>
-</header>
-
-<div class="page-heading">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3 class="fw-bold">Employee Details</h3>
-                <p class="text-subtitle text-muted">View detailed information of the employee</p>
-            </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item">Employees</li>
-                        <li class="breadcrumb-item active" aria-current="page">Details</li>
-                    </ol>
-                </nav>
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3 class="fw-bold">Employee Details</h3>
+                    <p class="text-subtitle text-muted">View detailed information of the employee.</p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('employees.index') }}">Employees</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Details</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
 
     <section class="section">
-        <div class="card shadow-lg border-0 rounded-3 animate__animated animate__fadeIn animate__delay-1s">
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
             <div class="card-header bg-primary text-white text-center py-4">
-                <h5 class="card-title mb-0">Employee Information</h5>
+                <h4 class="card-title mb-0 fs-5 fw-bold">
+                    <i class="bi bi-person-badge-fill me-2"></i> Employee Profile
+                </h4>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <!-- Left Column - Basic Info -->
+            <div class="card-body p-5">
+                <div class="row g-5">
                     <div class="col-12 col-md-6">
-                        <div class="mb-4">
-                            <label for="fullname" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-person-circle"></i> Full Name
-                            </label>
-                            <p class="fs-4 text-muted">{{ $employee->fullname }}</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="email" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-envelope"></i> Email
-                            </label>
-                            <p class="fs-4 text-muted">{{ $employee->email }}</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="email" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-house-door"></i> Alamat
-                            </label>
-                            <p class="fs-4 text-muted">{{ $employee->address }}</p>
-                        </div>
-                        <div class="mb-4">
-                            <label for="phone" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-telephone"></i> No Telepon
-                            </label>
-                            <p class="fs-4 text-muted">{{ $employee->phone_number }}</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="role" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-person-badge"></i> Role
-                            </label>
-                            <p class="fs-4 text-muted">{{ $employee->role->title }}</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="birth_date" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-calendar-date"></i> Birth Date
-                            </label>
-                            <p class="fs-4 text-muted">{{ \Carbon\Carbon::parse($employee->birth_date)->format('d M, Y') }}</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="hire_date" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-calendar-check"></i> Hire Date
-                            </label>
-                            <p class="fs-4 text-muted">{{ \Carbon\Carbon::parse($employee->hire_date)->format('d M, Y') }}</p>
-                        </div>
-                    </div>
-
-                    <!-- Right Column - Department, Status, Salary -->
-                    <div class="col-12 col-md-6">
-                        <div class="mb-4">
-                            <label for="department" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-building"></i> Department
-                            </label>
-                            <p class="fs-4 text-muted">{{ $employee->department->name }}</p>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="status" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-person-check"></i> Status
-                            </label>
-                            <p class="fs-4">
-                                @if($employee->status == 'active')
-                                    <span class="badge bg-success text-white">{{ ucfirst($employee->status) }}</span>
-                                @else
-                                    <span class="badge bg-danger text-white">{{ ucfirst($employee->status) }}</span>
-                                @endif
-                            </p>
-                        </div>
-
-
-                        <div class="mb-4">
-                            <label for="salary" class="form-label fs-5 fw-bold text-dark">
-                                <i class="bi bi-cash-stack"></i> Salary
-                            </label>
-                            <p class="fs-4 text-muted">{{ number_format($employee->salary, 0, ',', '.') }}</p>
-                        </div>
-
+                        <h5 class="text-primary mb-4 fw-bold border-bottom pb-2">Personal Information</h5>
                         
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-person-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Full Name</h6>
+                                <p class="fs-5 fw-bold mb-0">{{ $employee->fullname }}</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-envelope-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Email</h6>
+                                <p class="fs-5 fw-bold mb-0">{{ $employee->email }}</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-telephone-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Phone Number</h6>
+                                <p class="fs-5 fw-bold mb-0">{{ $employee->phone_number }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-house-door-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Address</h6>
+                                <p class="fs-5 fw-bold mb-0">{{ $employee->address }}</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-calendar-date-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Birth Date</h6>
+                                <p class="fs-5 fw-bold mb-0">{{ \Carbon\Carbon::parse($employee->birth_date)->format('d M, Y') }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <h5 class="text-primary mb-4 fw-bold border-bottom pb-2">Employment Details</h5>
+                        
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-building-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Department</h6>
+                                <p class="fs-5 fw-bold mb-0">{{ $employee->department->name }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-briefcase-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Role</h6>
+                                <p class="fs-5 fw-bold mb-0">{{ $employee->role->title }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-cash-stack fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Salary</h6>
+                                <p class="fs-5 fw-bold mb-0">Rp{{ number_format($employee->salary, 0, ',', '.') }}</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-calendar-check-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Hire Date</h6>
+                                <p class="fs-5 fw-bold mb-0">{{ \Carbon\Carbon::parse($employee->hire_date)->format('d M, Y') }}</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start mb-4">
+                            <i class="bi bi-person-check-fill fs-3 text-secondary me-3"></i>
+                            <div>
+                                <h6 class="text-muted mb-0">Status</h6>
+                                <p class="fs-5 fw-bold mb-0">
+                                    @if($employee->status == 'active')
+                                        <span class="badge rounded-pill bg-success text-white px-3 py-2">Active</span>
+                                    @else
+                                        <span class="badge rounded-pill bg-danger text-white px-3 py-2">Inactive</span>
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Back Button -->
-                <div class="text-end mt-4">
-                    <a href="{{ route('employees.index') }}" class="btn btn-outline-primary px-4 py-2 rounded-3">
-                        <i class="bi bi-arrow-left-circle-fill"></i> Back to Employee List
-                    </a>
-                </div>
+            </div>
+            <div class="card-footer bg-light border-0 text-end py-4">
+                <a href="{{ route('employees.index') }}" class="btn btn-outline-secondary px-4 py-2 rounded-3">
+                    <i class="bi bi-arrow-left me-2"></i> Back to Employee List
+                </a>
             </div>
         </div>
     </section>
-</div>
 
 @endsection
-
-

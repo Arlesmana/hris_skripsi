@@ -68,7 +68,7 @@
                     
                     <div class="mb-3">
                         <label for="" class="form-label">Masuk</label>
-                        <input type="time" class="form-control time" name="check_in" required>
+                        <input type="time" class="form-control time" name="check_in" >
                         @error('check_in')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

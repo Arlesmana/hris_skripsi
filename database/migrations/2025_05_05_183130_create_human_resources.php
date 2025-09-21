@@ -98,5 +98,7 @@ return new class extends Migration
         Schema::dropIfExists('payroll');
         Schema::dropIfExists('presences');
         Schema::dropIfExists('leave_requests');
+        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('users');
     }
 };

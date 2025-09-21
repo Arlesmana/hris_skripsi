@@ -33,9 +33,11 @@
                 </h5>
             </div>
             <div class="card-body">
-                @if (session('role') == 'HR')
+                @if (session('role') == 'Admin')
                 <div class="d-flex">
-                    <a href="{{ route('employees.create')}}" class="btn btn-primary mb-3 ms-auto">New Employees</a>
+                    <a href="{{ route('employees.create')}}" class="btn btn-primary mb-3 ms-auto">
+                        <i class="fa-solid fa-plus"></i> New Employees
+                    </a>
                 </div>
                 @endif
 
@@ -59,12 +61,12 @@
                     <tbody>
 
                         @foreach($employees as $employee)
-          
-                        <tr>
+        
+                        <tr>    
                             <td>{{ $employee->fullname }}</td>
                             <td>{{ $employee->email }}</td>
                             <td>{{ $employee->department ? $employee->department->name : 'Department belum dibuat!' }}</td>
-                            <td>{{ $employee->role && $employee->role->title ? $employee->role->title : 'Role belum dibuat!' }}</td>
+                            <td>{{ $employee->role ? $employee->role->title : 'role tidak ada' }}</td>
                             <td>
                                 @if($employee->status == 'active')
                                 <span class="text-success">{{ ucfirst($employee->status) }}</span>
@@ -73,23 +75,28 @@
                                 @endif
                             </td>
 
-                            <td>
-                                <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-info btn-sm">View</a>
-                                @if (session('role') == 'HR')
-                                <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <td>                            
+                                <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-info btn-sm">
+                                    <i class="fa-solid fa-eye"></i> View
+                                </a>
+                                @if (session('role') == 'Admin')
+                                <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </a>
                                 <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah kamu yakin?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('apakah kamu yakin?')">
+                                        <i class="fa-solid fa-trash"></i> Delete
+                                    </button>
                                 </form>
                                 @endif
                             </td>
                         </tr>
-
                         @endforeach
-
                     </tbody>
                 </table>
+                
             </div>
         </div>
 

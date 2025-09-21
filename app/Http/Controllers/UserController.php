@@ -12,6 +12,7 @@ class UserController extends Controller
     {
        
         $user = Auth::user();
+        
 
         return view('users.index', compact('user'));
     }
@@ -20,15 +21,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'employee_id' => 'required|string|max:255',
+            'role_id' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->employee_id = $request->employee_id;
-        $user->password = bcrypt($request->password);
-        $user->save();
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->role_id = $request->role_id;
+            $user->password = bcrypt($request->password);
+            $user->save();
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }

@@ -58,5 +58,5 @@ class User extends Authenticatable
     {
     return $this->belongsTo(Role::class);  // Menyesuaikan jika `user` memiliki foreign key `role_id`
     }
-
+    
 }

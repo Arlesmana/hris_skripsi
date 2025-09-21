@@ -5,8 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Employee;
-
+use App\Models\Role;
+use App\Models\Employee; 
 
 class CheckRole
 {
@@ -15,23 +15,35 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string...$roles): Response
+    public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        $employeeID = auth()->user()->employee_id; 
-        
-        $employee = Employee::find($employeeID);
+        // Ambil role_id dari user yang sedang login
+        $role_id = auth()->user()->role_id;
+        employee::where('id', session('employee_id'))->get(); // Mengambil data employee berdasarkan session
 
-        $request->session()->put('role', $employee->role->title);
-        $request->session()->put('employee_id', $employee->id);
+        // Jika role_id tidak ada, return 403
+        if (!$role_id) {
+            return response()->view('403.403', [], 403);
+        }   
 
+        // Cari role berdasarkan role_id
+        $role = Role::find($role_id);
 
-        // Cek role
-        if (! in_array($employee->role->title, $roles)) {
-        // Bisa pilih salah satu:
-        // abort(403, 'Access denied for this role.!');
-        // atau:
-        return response()->view('403.403', [], 403);
-    }
+        // Pastikan role ditemukan
+        if (!$role) {
+            // Jika role tidak ditemukan, return 403
+            return response()->view('403.403', [], 403);
+        }
+
+        // Menyimpan data role dan role_id ke dalam session
+        $request->session()->put('role', $role->title); // pastikan role ada
+        $request->session()->put('role_id', $role->id);
+
+        // Cek apakah role dari user ada di dalam array $roles
+        if (! in_array($role->title, $roles)) {
+            // Jika role tidak cocok, beri akses ditolak
+            return response()->view('403.403', [], 403);
+        }
 
         return $next($request);
     }

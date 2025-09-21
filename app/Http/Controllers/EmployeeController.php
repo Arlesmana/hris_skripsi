@@ -11,12 +11,13 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        
-        if (session('role')== 'HR')
+      
+      
+        if (session('role')== 'Admin' || session('role') == 'HR' )
         $employees = employee::all();
         else
-        $employees = employee::where('id', session('employee_id'))->get();
-       
+        $employees = Employee::where('id', session('employee_id'))->get(); 
+        
         return view('employees.index', compact('employees'));
 
     }
@@ -25,8 +26,6 @@ class EmployeeController extends Controller
     {
         $departments = Department::all();
         $roles = Role::all();
-       
-
         return view('employees.create', compact('departments', 'roles'));
     }
 

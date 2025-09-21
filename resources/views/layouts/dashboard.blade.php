@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('mazer/dist/assets/extensions/simple-datatables/style.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/dist/assets/extensions/table-datatables/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
@@ -61,7 +62,7 @@
     <div class="sidebar-menu">
         <ul class="menu">
             
-            @if(in_array(session('role'), ['HR']))
+            @if(in_array(session('role'), ['Admin']))
     
             
             <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }}">
@@ -124,7 +125,7 @@
 
             @endif
 
-            @if(in_array(session('role'), ['Developer', 'IT']))
+            @if(in_array(session('role'), ['HR','IT','Marketing']))
 
             <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }}">
                 <a href="{{ url('/dashboard') }}" class='sidebar-link'>
