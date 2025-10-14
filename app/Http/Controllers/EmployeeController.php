@@ -41,7 +41,7 @@ class EmployeeController extends Controller
             'department_id' => 'required',
             'role_id' => 'required',
             'status' => 'required|string',
-            'salary' => 'required|numeric',
+            'salary' => 'required|numeric|min:0',
         ]);
 
         Employee::create($request->all());

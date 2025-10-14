@@ -90,6 +90,14 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="hire_date" class="form-label"><i class="bi bi-calendar-check-fill"></i> Hire Date</label>
+                            <input type="date" class="form-control @error('hire_date') is-invalid @enderror" name="hire_date" value="{{ old('hire_date') }}" required>
+                            @error('hire_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
 
                     <!-- Right Column - Employment Details -->
